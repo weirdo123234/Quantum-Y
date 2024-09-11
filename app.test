@@ -1,7 +1,4 @@
 import SwiftUI
-qya='Welcome to Quantum Y, we are downloading the UI for you, user!'
-echo $qya
-
 @main
 struct QuantumYApp: App {
     var body: some Scene {
