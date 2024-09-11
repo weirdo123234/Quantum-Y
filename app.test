@@ -1,5 +1,5 @@
 import SwiftUI
-qya='Welcome to Quantum Y, we are downloading the UI for you!'
+qya='Welcome to Quantum Y, we are downloading the UI for you, user!'
 echo $qya
 
 @main
