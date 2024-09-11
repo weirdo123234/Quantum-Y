@@ -1,0 +1,95 @@
+import SwiftUI
+
+@main
+struct QuantumYApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var scriptText: String = ""
+    @State private var portText: String = "Port: 0000"
+    @State private var portColor: Color = .red
+    @State private var isAttached: Bool = false
+
+    var body: some View {
+        VStack {
+            Text("Quantum Y")
+                .font(.title)
+                .fontWeight(.light)
+                .foregroundColor(.white)
+                .padding()
+
+            TextEditor(text: $scriptText)
+                .foregroundColor(.black)
+                .padding()
+                .background(Color.gray.opacity(0.8))
+                .border(Color.gray, width: 1)
+                .frame(height: 300)
+
+            HStack {
+                Button(action: executeScript) {
+                    Text("Execute")
+                        .foregroundColor(.black)
+                        .padding()
+                        .background(Color.gray)
+                        .cornerRadius(5)
+                }
+                
+                Button(action: injectPort) {
+                    Text("Attach")
+                        .foregroundColor(.black)
+                        .padding()
+                        .background(Color.gray)
+                        .cornerRadius(5)
+                }
+                .disabled(isAttached) // Disable button after being pressed
+                
+                Button(action: clearText) {
+                    Text("Clear")
+                        .foregroundColor(.black)
+                        .padding()
+                        .background(Color.gray)
+                        .cornerRadius(5)
+                }
+            }
+            .padding()
+
+            Text(portText)
+                .foregroundColor(portColor)
+                .padding()
+                .background(Color.black.opacity(0.8))
+                .border(Color.gray, width: 1)
+        }
+        .padding()
+        .background(LinearGradient(
+            gradient: Gradient(colors: [.black, .gray]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        ))
+        .edgesIgnoringSafeArea(.all)
+    }
+
+    private func executeScript() {
+        // Your script execution logic here
+        print("Script Executed: \(scriptText)")
+    }
+
+    private func injectPort() {
+        if !isAttached {
+            // Simulate generating a port
+            let randomPort = Int.random(in: 1000...9999)
+            portText = "Port: \(randomPort)"
+            portColor = (randomPort == 0000) ? .red : .green
+            isAttached = true
+        }
+    }
+
+    private func clearText() {
+        scriptText = ""
+    }
+}
+
